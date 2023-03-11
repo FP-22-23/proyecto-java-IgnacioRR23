@@ -1,5 +1,5 @@
 package src;
 
-public enum LugarVenta {
+public enum TipoLugar {
 	PARK, BEACH;
 }
