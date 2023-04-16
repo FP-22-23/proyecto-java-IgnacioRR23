@@ -1,11 +1,8 @@
 package src;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
+import java.time.LocalDate;
 import common.Ventas;
-import fp.ContenedorFriends;
-import fp.FactoriaFriends;
 
 public class TestLimonada {
 
