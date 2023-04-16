@@ -69,5 +69,20 @@ public class ContenedorLimonada {
 		}
 		return m;
 	}
+	
+	public Map<TipoLugar,List<Limonada>> getPuestoSegunLugar(){
+		Map<TipoLugar,List<Limonada>> res = new HashMap<TipoLugar,List<Limonada>>();
+		for(Limonada l: puesto) {
+			if(res.containsKey(l.getLugar())){
+				res.get(l.getLugar()).add(l);
+			}
+			else {
+				ArrayList<Limonada> puesto = new ArrayList<>();
+				puesto.add(l);
+				res.put(l.getLugar(), puesto);
+			}
+		}
+		return res;
+	}
 		
 }

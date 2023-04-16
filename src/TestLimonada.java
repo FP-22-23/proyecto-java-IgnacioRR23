@@ -1,5 +1,6 @@
 package src;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import common.Ventas;
@@ -10,8 +11,8 @@ public class TestLimonada {
 
 		//Constructor 1
 		Ventas v = new Ventas(60, 50);
-		Limonada l = new Limonada(LocalDateTime.now(), "Los Ángeles", 90.0, 90, 0.5);
-		Limonada l1 = new Limonada(LocalDateTime.now(), "Los Ángeles", 90.0, 90, 0.5);
+		Limonada l = new Limonada(LocalDate.now(), "Los Ángeles", 90.0, 90, 0.5);
+		Limonada l1 = new Limonada(LocalDate.now(), "Los Ángeles", 90.0, 90, 0.5);
 		l.incorpora(v);
 		l.setLugar(TipoLugar.BEACH);
 		l1.setLugar(TipoLugar.PARK);

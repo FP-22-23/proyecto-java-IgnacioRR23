@@ -1,5 +1,6 @@
 package src;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +14,7 @@ import utiles.Checkers;
 public class Limonada {
 	
 	//Atributos
-	private LocalDateTime fecha;
+	private LocalDate fecha;
 	private String ciudad;
 	private TipoLugar lugar;
 	private Double temperaturaF;
@@ -29,7 +30,7 @@ public class Limonada {
 	}
 	
 	//Constructores
-	public Limonada (LocalDateTime fecha, String ciudad, TipoLugar lugar,  Integer limonadasVendidas, Integer naranjadasVendidas, Double temperaturaF, Integer folletosRepartidos, Double precio) {
+	public Limonada (LocalDate fecha, String ciudad, TipoLugar lugar,  Integer limonadasVendidas, Integer naranjadasVendidas, Double temperaturaF, Integer folletosRepartidos, Double precio) {
 		this.fecha = fecha;
 		this.ciudad = ciudad;
 		this.lugar = lugar;
@@ -42,7 +43,7 @@ public class Limonada {
 		ventasLN = new LinkedList<Ventas>();
 	}
 	
-	public Limonada (LocalDateTime fecha, String ciudad, Double temperaturaF, Integer folletosRepartidos, Double precio) {
+	public Limonada (LocalDate fecha, String ciudad, Double temperaturaF, Integer folletosRepartidos, Double precio) {
 		this.fecha = fecha;
 		this.ciudad = ciudad;
 		this.temperaturaF = temperaturaF;

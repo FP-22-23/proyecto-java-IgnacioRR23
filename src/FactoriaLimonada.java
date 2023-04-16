@@ -3,18 +3,20 @@ package src;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
+
+
 public class FactoriaLimonada {
 	public static Limonada parseaLimonada(String s){
-		Limonada res;
+		Limonada res=null;
 		utiles.Checkers.checkNoNull(s);
 		String [] trozos = s.split(",");
 		utiles.Checkers.check("Formato no válido", trozos.length == 8);
 		
-		LocalDateTime fecha= LocalDateTime.parse(trozos[0].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		LocalDate fecha= LocalDate.parse(trozos[0].trim(), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
 		String ciudad = trozos[1].trim();
 		TipoLugar lugar = TipoLugar.valueOf(trozos[2].trim().toUpperCase());
 		Integer limonadasVendidas = Integer.parseInt(trozos[3].trim());
