@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import common.Ventas;
 import utiles.Checkers;
@@ -20,12 +21,27 @@ public class Limonada {
 	private Integer folletosRepartidos;
 	private Double precio;
 	private List<Ventas> ventasLN;
+	private Integer limonadasVendidas;
+	private Integer naranjadasVendidas;
 	
 	public Boolean getfolletosSuficientes() {
 		return (folletosRepartidos > 100); //Se considerará que se han repartido suficientes folletos a partir de 100.
 	}
 	
 	//Constructores
+	public Limonada (LocalDateTime fecha, String ciudad, TipoLugar lugar,  Integer limonadasVendidas, Integer naranjadasVendidas, Double temperaturaF, Integer folletosRepartidos, Double precio) {
+		this.fecha = fecha;
+		this.ciudad = ciudad;
+		this.lugar = lugar;
+		this.limonadasVendidas = limonadasVendidas;
+		this.naranjadasVendidas = naranjadasVendidas;
+		this.temperaturaF = temperaturaF;
+		this.folletosRepartidos = folletosRepartidos;
+		Checkers.check("Error en el precio", precio >=0);
+		this.precio = precio;
+		ventasLN = new LinkedList<Ventas>();
+	}
+	
 	public Limonada (LocalDateTime fecha, String ciudad, Double temperaturaF, Integer folletosRepartidos, Double precio) {
 		this.fecha = fecha;
 		this.ciudad = ciudad;
@@ -39,7 +55,6 @@ public class Limonada {
 	}
 	
 	public Limonada(String ciudad, Double temperaturaF, Integer folletosRepartidos) {
-		super();
 		this.ciudad = ciudad;
 		this.temperaturaF = temperaturaF;
 		this.temperaturaC = (temperaturaF-32)/1.8;
@@ -105,5 +120,14 @@ public class Limonada {
 				+ ", en Celsius= " + temperaturaC + ", fueron repartidos los suficientes folletos= " + getfolletosSuficientes() + ", a un precio por limonada/naranjada de= "
 				+ precio + "]";
 	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public Double getTemperaturaF() {
+		return temperaturaF;
+	}
+
 
 }
