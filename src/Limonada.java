@@ -17,19 +17,21 @@ public class Limonada {
 	private LocalDate fecha;
 	private String ciudad;
 	private TipoLugar lugar;
+	private Integer limonadasVendidas;
+	private Integer naranjadasVendidas;
 	private Double temperaturaF;
 	private Double temperaturaC;
 	private Integer folletosRepartidos;
 	private Double precio;
 	private List<Ventas> ventasLN;
-	private Integer limonadasVendidas;
-	private Integer naranjadasVendidas;
+	
 	
 	public Boolean getfolletosSuficientes() {
 		return (folletosRepartidos > 100); //Se considerará que se han repartido suficientes folletos a partir de 100.
 	}
 	
 	//Constructores
+
 	public Limonada (LocalDate fecha, String ciudad, TipoLugar lugar,  Integer limonadasVendidas, Integer naranjadasVendidas, Double temperaturaF, Integer folletosRepartidos, Double precio) {
 		this.fecha = fecha;
 		this.ciudad = ciudad;
@@ -60,6 +62,10 @@ public class Limonada {
 		this.temperaturaF = temperaturaF;
 		this.temperaturaC = (temperaturaF-32)/1.8;
 		this.folletosRepartidos = folletosRepartidos;
+	}
+
+	public Limonada(List<Limonada> limonadas) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public int hashCode() {
@@ -128,6 +134,10 @@ public class Limonada {
 
 	public Double getTemperaturaF() {
 		return temperaturaF;
+	}
+
+	public int getLimonadasVendidas() {
+		return limonadasVendidas;
 	}
 
 
