@@ -123,7 +123,7 @@ public class Limonada {
 		
 	//toString
 	public String toString() {
-		return "Limonada [A fecha= " + fecha + ", en la ciudad de =" + ciudad + ", en el lugar= " + getLugar() +", la cantidad de limonada y naranjas vendidas fue de= " + getVentasLN() + ", a una temperatura Fahrenheit de= " + temperaturaF
+		return "Limonada [A fecha= " + fecha + ", en la ciudad de =" + ciudad + ", en el lugar= " + getLugar() +", la cantidad de limonadas vendidas fue de= "+getLimonadasVendidas() + " y naranjas vendidas fue de= " + getNaranjadasVendidas() + ", a una temperatura Fahrenheit de= " + temperaturaF
 				+ ", en Celsius= " + temperaturaC + ", fueron repartidos los suficientes folletos= " + getfolletosSuficientes() + ", a un precio por limonada/naranjada de= "
 				+ precio + "]";
 	}
@@ -140,5 +140,12 @@ public class Limonada {
 		return limonadasVendidas;
 	}
 
+	public int getNaranjadasVendidas() {
+		return naranjadasVendidas;
+	}
+
+	public LocalDate getFecha() {
+		return fecha;
+	}
 
 }

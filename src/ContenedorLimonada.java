@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 public class ContenedorLimonada implements Limonadas {
 	
 	//Atributo
-		private List<Limonada> puesto;
+		private static List<Limonada> puesto;
 		
 		
 	//Constructores
@@ -27,11 +27,11 @@ public class ContenedorLimonada implements Limonadas {
 	}
 	
 	public ContenedorLimonada(Collection<Limonada> puesto) {
-		this.puesto = new ArrayList<Limonada>(puesto);
+		ContenedorLimonada.puesto = new ArrayList<Limonada>(puesto);
 	}
 		
 	public ContenedorLimonada(Stream<Limonada> puesto) {
-		this.puesto = puesto.collect(Collectors.toList());
+		ContenedorLimonada.puesto = puesto.collect(Collectors.toList());
 	}
 
 	//Métodos
@@ -47,15 +47,15 @@ public class ContenedorLimonada implements Limonadas {
 	    }
 	}
 	
-	public int calcularNumPuestos(List<Limonada> puesto) {
+	public int calcularNumPuestos() {
 		return puesto.size();
 	}
 	
-	public boolean existePuesto(List<Limonada> puesto, Limonada l) {
+	public boolean existePuesto(Limonada l) {
 	    return puesto.contains(l); //Devuelve si existe el puesto en la lista
 	}
 	
-	public boolean existePuesto2(List<Limonada> puesto, Limonada l) {
+	public boolean existePuesto2(Limonada l) {
 	    return puesto.stream().anyMatch(p -> p.equals(l));
 	}
 
@@ -72,7 +72,7 @@ public class ContenedorLimonada implements Limonadas {
 		return m;
 	}
 	
-	public Map<String, Integer> contarCiudades2(List<Limonada> puesto) {
+	public Map<String, Integer> contarCiudades2() {
 	    return puesto.stream()
 	            .collect(Collectors.groupingBy(Limonada::getCiudad, Collectors.summingInt(e -> 1)));
 	}
@@ -90,7 +90,7 @@ public class ContenedorLimonada implements Limonadas {
 		return m;
 	}
 	
-	public Map<Double, String> getCiudadPorTemperatura2(List<Limonada> puesto) {
+	public Map<Double, String> getCiudadPorTemperatura2() {
 	    return puesto.stream()
 	            .collect(Collectors.toMap(Limonada::getTemperaturaF, Limonada::getCiudad, (ciudad1, ciudad2) -> ciudad1 + ciudad2));
 	}
@@ -125,23 +125,23 @@ public class ContenedorLimonada implements Limonadas {
 		return res;
 	}
 	
-	public static Limonada obtenerCiudadMayorTemperatura(List<Limonada> limonadas) {
-        Optional<Limonada> limonadaMayorTemperatura = limonadas.stream()
+	public static Limonada obtenerCiudadMayorTemperatura() {
+        Optional<Limonada> limonadaMayorTemperatura = puesto.stream()
                 .filter(l -> l.getLimonadasVendidas() > 90)
                 .max(Comparator.comparingDouble(Limonada::getTemperaturaF));
 
         return limonadaMayorTemperatura.orElse(null);
     }
 	
-	public static List<Limonada> seleccionarLimondas(List<Limonada> limonadas) {
-        return limonadas.stream()
+	public static List<Limonada> seleccionarLimondas() {
+        return puesto.stream()
                 .filter(l -> l.getLimonadasVendidas() > 90 && l.getTemperaturaF() > 75.0)
                 .sorted(Comparator.comparing(Limonada::getLimonadasVendidas).reversed())
                 .collect(Collectors.toList());
     }
 	
-	public static List<Double> obtenerPreciosLimonadas(List<Limonada> limonadas) {
-        return limonadas.stream()
+	public static List<Double> obtenerPreciosLimonadas() {
+        return puesto.stream()
                 .map(Limonada::getPrecio)
                 .collect(Collectors.collectingAndThen(
                         Collectors.toList(),
@@ -156,17 +156,17 @@ public class ContenedorLimonada implements Limonadas {
                         }));      
     }
 	
-	public static Map<String, Limonada> obtenerMaximosMinimosLimonadasVendidas(List<Limonada> limonadas) {
+	public static Map<String, Limonada> obtenerMaximosMinimosLimonadasVendidas() {
         Map<String, Limonada> resultados = new HashMap<>();
 
-        resultados.put("maximo", limonadas.stream().max(Comparator.comparing(Limonada::getLimonadasVendidas)).orElse(null));
-        resultados.put("minimo", limonadas.stream().min(Comparator.comparing(Limonada::getLimonadasVendidas)).orElse(null));
+        resultados.put("maximo", puesto.stream().max(Comparator.comparing(Limonada::getLimonadasVendidas)).orElse(null));
+        resultados.put("minimo", puesto.stream().min(Comparator.comparing(Limonada::getLimonadasVendidas)).orElse(null));
 
         return resultados;
     }
 	
-	public static SortedMap<Integer, List<Limonada>> obtenerNLimonadasMasVendidas(List<Limonada> limonadas, int n) {
-        SortedMap<Integer, List<Limonada>> resultados = limonadas.stream()
+	public static SortedMap<Integer, List<Limonada>> obtenerNLimonadasMasVendidas(int n) {
+        SortedMap<Integer, List<Limonada>> resultados = puesto.stream()
                 .collect(Collectors.groupingBy(Limonada::getLimonadasVendidas, TreeMap::new, Collectors.toList()))
                 .entrySet()
                 .stream()
@@ -177,20 +177,20 @@ public class ContenedorLimonada implements Limonadas {
         return resultados;
     }
 	
-	public static LocalDate obtenerFechaMayorTemperatura(Map<LocalDate, Limonada> limonadas) {
-        LocalDate fechaMayorTemperatura = null;
-        Double temperaturaMaxima = Double.MIN_VALUE;
+	public static LocalDate obtenerFechaMayorTemperatura() {
+	    LocalDate fechaMayorTemperatura = null;
+	    Double temperaturaMaxima = Double.MIN_VALUE;
 
-        for (Map.Entry<LocalDate, Limonada> entry : limonadas.entrySet()) {
-            Limonada limonada = entry.getValue();
-            if (limonada.getTemperaturaF() > temperaturaMaxima) {
-                temperaturaMaxima = limonada.getTemperaturaF();
-                fechaMayorTemperatura = entry.getKey();
-            }
-        }
+	    for (Limonada limonada : puesto) {
+	        if (limonada.getTemperaturaF() > temperaturaMaxima) {
+	            temperaturaMaxima = limonada.getTemperaturaF();
+	            fechaMayorTemperatura = limonada.getFecha();
+	        }
+	    }
 
-        return fechaMayorTemperatura;
-    }
+	    return fechaMayorTemperatura;
+	}
+
 
 
 	@Override
