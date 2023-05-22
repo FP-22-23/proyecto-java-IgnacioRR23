@@ -15,6 +15,10 @@ public class TestLimonada {
 	public static void testObtenerNLimonadasMasVendidas(ContenedorLimonada p, int n) {
 		System.out.println(ContenedorLimonada.obtenerNLimonadasMasVendidas(n));
 	}
+	
+	public static void testObtenerFechaMayorTemperatura() {
+		System.out.println(ContenedorLimonada.obtenerFechaMayorTemperatura());
+	}
 
 	public static void main(String[] args) {
 
@@ -38,6 +42,7 @@ public class TestLimonada {
 		ContenedorLimonada p = new ContenedorLimonada(puesto);
 		testContarCiudades(p);
 		testObtenerNLimonadasMasVendidas(p,5);
+		testObtenerFechaMayorTemperatura();
 	}		
 }
 
